@@ -17,7 +17,7 @@ export const projects = [
   },
   {
     title: "忘れ物管理AIアプリ開発",
-    image: "/project2.jpg",
+    image: "/images/mibun.png",
     techStack: ["Vue.js", "Express", "PostgreSQL"],
     description: "An e-commerce platform with real-time inventory management.",
     githubLink: "https://github.com/johndoe/project2",
