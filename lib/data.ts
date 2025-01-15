@@ -104,8 +104,8 @@ export const education = [
 ];
 
 export const socialLinks = {
-  github: "https://github.com/johndoe",
-  linkedin: "https://linkedin.com/in/johndoe",
-  twitter: "https://twitter.com/johndoe",
+  github: "https://github.com/kai00514",
+  linkedin: "https://linkedin.com/",
+  twitter: "https://twitter.com/",
 };
 

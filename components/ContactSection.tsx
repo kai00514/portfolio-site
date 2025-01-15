@@ -1,20 +1,38 @@
 "use client"
-import { useState } from 'react';
+import { useState, ChangeEvent, FormEvent } from 'react';
 import { motion } from 'framer-motion';
 import { socialLinks } from '@/lib/data';
 
-const ContactSection = () => {
-  const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
-  const [formStatus, setFormStatus] = useState({ success: false, message: '' });
+interface FormData {
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+}
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+const ContactSection = () => {
+  const [formData, setFormData] = useState<FormData>({ 
+    name: '', 
+    email: '', 
+    subject: '', 
+    message: '' 
+  });
+  const [formStatus, setFormStatus] = useState({ 
+    success: false, 
+    message: '' 
+  });
+
+  // input と textarea の両方に対応する型定義
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (e) => {
+  // form submit イベントの型定義
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Here you would typically send the form data to your backend
-    // For this example, we'll just simulate a successful submission
     setFormStatus({ success: true, message: 'Message sent successfully!' });
     setFormData({ name: '', email: '', subject: '', message: '' });
   };

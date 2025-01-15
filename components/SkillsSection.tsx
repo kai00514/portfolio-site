@@ -2,7 +2,18 @@
 import { motion } from 'framer-motion';
 import { skills } from '@/lib/data';
 
-const SkillCategory = ({ title, skills }) => (
+interface Skill {
+  name: string;
+  level: number;
+  years?: number;  // optional because softSkills don't have years
+}
+
+interface SkillCategoryProps {
+  title: string;
+  skills: Skill[];
+}
+
+const SkillCategory = ({ title, skills }: SkillCategoryProps) => (
   <div className="mb-8">
     <h3 className="text-xl font-semibold mb-4">{title}</h3>
     <div className="space-y-4">

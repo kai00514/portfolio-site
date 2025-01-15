@@ -2,45 +2,56 @@
 import { motion } from 'framer-motion';
 import { experience, education } from '@/lib/data';
 
-const ExperienceItem = ({ item, type }) => (
+interface WorkExperience {
+  company: string;
+  period: string;
+  role: string;
+  responsibilities: string[];
+  achievements: string[];
+  technologies: string[];
+}
+
+interface Education {
+  degree: string;
+  institution: string;
+  period: string;
+  courses: string[];
+  achievements: string[];
+}
+
+interface ExperienceItemProps {
+  item: WorkExperience | Education;
+  type: 'work' | 'education';
+}
+
+const ExperienceItem = ({ item, type }: ExperienceItemProps) => (
   <motion.div
     className="mb-8"
     initial={{ opacity: 0, y: 50 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.5 }}
   >
-    <h3 className="text-xl font-semibold">{item.company || item.degree}</h3>
-    <p className="text-gray-600 mb-2">{item.period}</p>
-    {type === 'work' && (
-      <>
-        <p className="text-gray-700 mb-2">{item.role}</p>
-        <ul className="list-disc list-inside mb-2">
-          {item.responsibilities.map((resp, index) => (
-            <li key={index} className="text-gray-600">{resp}</li>
-          ))}
-        </ul>
-        <h4 className="font-semibold mb-1">Key Achievements:</h4>
-        <ul className="list-disc list-inside mb-2">
-          {item.achievements.map((achievement, index) => (
-            <li key={index} className="text-gray-600">{achievement}</li>
-          ))}
-        </ul>
-        <p className="text-gray-700">
-          <span className="font-semibold">Technologies used:</span> {item.technologies.join(', ')}
-        </p>
-      </>
-    )}
-    {type === 'education' && (
-      <>
-        <p className="text-gray-700 mb-2">{item.institution}</p>
-        <p className="text-gray-600 mb-2">Relevant Coursework: {item.courses.join(', ')}</p>
-        <ul className="list-disc list-inside">
-          {item.achievements.map((achievement, index) => (
-            <li key={index} className="text-gray-600">{achievement}</li>
-          ))}
-        </ul>
-      </>
-    )}
+    <div className="bg-white p-6 rounded-lg shadow-md">
+      {type === 'work' ? (
+        <>
+          <h4 className="text-xl font-semibold">{(item as WorkExperience).company}</h4>
+          <p className="text-gray-600">{(item as WorkExperience).role}</p>
+        </>
+      ) : (
+        <>
+          <h4 className="text-xl font-semibold">{(item as Education).degree}</h4>
+          <p className="text-gray-600">{(item as Education).institution}</p>
+        </>
+      )}
+      <p className="text-gray-500 mt-2">{item.period}</p>
+      
+      {/* 実績リスト */}
+      <ul className="mt-4 list-disc list-inside">
+        {item.achievements.map((achievement, index) => (
+          <li key={index} className="text-gray-700">{achievement}</li>
+        ))}
+      </ul>
+    </div>
   </motion.div>
 );
 
